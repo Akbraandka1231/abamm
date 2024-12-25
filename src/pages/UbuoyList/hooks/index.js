@@ -10,7 +10,7 @@ const Index = () => {
 
   const fetchData = async () => {
     await axios
-      .get(`${process.env.REACT_APP_BASE_URL}/status`)
+      .get(`https://c-greenproject.org:4443/status`)
       .then((res) => {
         setData(res.data);
       })
