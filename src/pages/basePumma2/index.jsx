@@ -22,7 +22,7 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/petengoran/latest");
+        const response = await axios.get("https://c-greenproject.org:4443/petengoran/latest");
         console.log(response.data);
         setData(response.data);
       } catch (err) {

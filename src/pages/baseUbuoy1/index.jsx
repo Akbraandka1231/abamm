@@ -25,7 +25,7 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/petengoran/latest");
+        const response = await axios.get("https://c-greenproject.org:4443/petengoran/latest");
         setDataBuoy(response.data);
       } catch (err) {
         console.error("Error fetching data:", err.message);
@@ -41,7 +41,7 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/petengoran/latest");
+        const response = await axios.get("https://c-greenproject.org:4443/petengoran/latest");
         setFCDataBuoy(response.data);
       } catch (err) {
         console.error("Error fetching data:", err.message);
@@ -68,7 +68,7 @@ const Index = ({
           );
         } else {
           responseDataChart = await axios.get(
-            `/petengoran/all/1?timer=${timeFrame}`
+            `https://c-greenproject.org:4443/petengoran/all/1?timer=${timeFrame}`
           );
         }
 

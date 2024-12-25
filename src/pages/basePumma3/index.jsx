@@ -22,7 +22,7 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/petengoran/latest");
+        const response = await axios.get("https://c-greenproject.org:4443/petengoran/latest");
         console.log(response.data);
         setData(response.data);
       } catch (err) {
@@ -52,7 +52,7 @@ const Index = ({
           );
         } else {
           responseDataChart = await axios.get(
-            `/petengoran/all/1?timer=${timeFrame}`
+            `https://c-greenproject.org:4443/petengoran/all/1?timer=${timeFrame}`
           );
         }
 
@@ -76,7 +76,7 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/petengoran/image", {
+        const response = await axios.get("https://c-greenproject.org:4443/petengoran/image", {
           responseType: "blob", // Penting: Mengatur responseType ke 'blob'
         });
 
