@@ -69,50 +69,17 @@ const Index = () => {
     {
       name1: "PUMMA U-TEWS 001",
       nameLocation1 : "Gebang",
-      sensor: data && data[1].sensor,
-      location: data && data[1].location,
-      country: data && data[1].country,
-      LastValue: data && data[1].lastWater,
-      lastDate:
-        data &&
-        `${moment
-          (data[1].timestamp)
-          .format("DD MMMM YYYY, HH:mm:ss")} `,
-      ElapsedTime: ElapsedTime(data && data[1].timestamp ),
-      link: "/pumma-gebang",
-      timeDeferen : data && data[1].feedLatency === "INACTIVE" ? data[1].feedLatency : confersiTime(data && data[1].feedLatency )
+      link: "/pumma-gebang"
     },
     {
       name2: "PUMMA U-TEWS 002",
       nameLocation2 : "Canti",
-      sensor: data && data[2].sensor,
-      location: data && data[2].location,
-      country: data && data[2].country,
-      LastValue: data && data[2].lastWater,
-      lastDate:
-        data &&
-        `${moment
-          (data[0].timestamp)
-          .format("DD MMMM YYYY, HH:mm:ss")} `,
-      ElapsedTime: ElapsedTime(data && data[2].timestamp),
-      link: "/pumma-canti",
-      timeDeferen : confersiTime(data && data[2].feedLatency )
+      link: "/pumma-canti"
     },
     {
       name3: "PUMMA U-TEWS 003",
       nameLocation3 : "Panjang",
-      sensor: data && data[0].sensor,
-      location: data && data[0].location,
-      country: data && data[0].country,
-      LastValue: data && data[0].lastWater,
-      lastDate:
-        data &&
-        `${moment
-          (data[0].timestamp)
-          .format("DD MMMM YYYY, HH:mm:ss")} `,
-      ElapsedTime: ElapsedTime(data && data[0].timestamp),
-      link: "/pumma-panjang",
-      timeDeferen : confersiTime(data && data[0].feedLatency )
+      link: "/pumma-panjang"
     },
     {
       name4 : "PUMMA U-TEWS 004",

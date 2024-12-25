@@ -68,33 +68,11 @@ const Index = () => {
   const dataClimatologi = [
     {
       name1: "Climatologi 001",
-      sensor: data && data[1].sensor,
-      location: data && data[1].location,
-      country: data && data[1].country,
-      LastValue: data && data[1].lastWater,
-      lastDate:
-        data &&
-        `${moment
-          (data[1].timestamp)
-          .format("DD MMMM YYYY, HH:mm:ss")} `,
-      ElapsedTime: ElapsedTime(data && data[1].timestamp ),
-      link: "/climatologi-canti",
-      timeDeferen : data && data[1].feedLatency === "INACTIVE" ? data[1].feedLatency : confersiTime(data && data[1].feedLatency )
+      link: "/climatologi-canti"
     },
     {
       name2: "Climatologi 002",
-      sensor: data && data[2].sensor,
-      location: data && data[2].location,
-      country: data && data[2].country,
-      LastValue: data && data[2].lastWater,
-      lastDate:
-        data &&
-        `${moment
-          (data[0].timestamp)
-          .format("DD MMMM YYYY, HH:mm:ss")} `,
-      ElapsedTime: ElapsedTime(data && data[2].timestamp),
-      link: "/climatologi-canti",
-      timeDeferen : confersiTime(data && data[2].feedLatency )
+      link: "/climatologi-canti"
     },
   ];
   return { dataClimatologi , data, ElapsedTime };
