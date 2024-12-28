@@ -35,8 +35,6 @@ const Index = ({ isFalse, setIsfalse, setBurgers, setBurger }) => {
       >
         <img src="\logo.svg" alt="logo" height={85} width={85}/>
       </div>
-
-      {/* menu sidebar */}
       <div className="px-2">
         <div
           onClick={handleclikPumma}

@@ -129,41 +129,41 @@ const Index = ({
     <div className="flex flex-col">
       <div className="overflow-x-auto">
         <div className="min-h-screen w-full inline-block align-middle">
-          <div className="min-h-screen px-4 py-6 bg-white rounded-lg shadow-lg">
+          <div className="min-h-screen md:w-full w-fit px-4 py-6 bg-white rounded-lg shadow-lg">
             <div className="w-full">
-              <div className="mx-5 my-3 gap-5 pb-10">
+              <div className="md:mx-5 md:my-3 md:gap-5 md:pb-10">
                 <TabGroup>
                   <TabList className="border-2 border-[#2E3192] overflow-hidden bg-white w-fit rounded-lg">
-                    <Tab className="px-2 py-2 text-base font-medium text-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
+                    <Tab className="md:px-2 px-1 py-2 text-xs md:text-base font-medium text-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
                       Card Status
                     </Tab>
-                    <Tab className="px-2 py-2 text-base font-medium text-[#2E3192] border-x-2 border-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
+                    <Tab className="md:px-2 px-1 py-2 text-xs md:text-base font-medium text-[#2E3192] border-x-2 border-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
                       Table
                     </Tab>
-                    <Tab className="px-2 py-2 text-base font-medium text-[#2E3192] border-r-2 border-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
+                    <Tab className="md:px-2 px-1 py-2 text-xs md:text-base font-medium text-[#2E3192] border-r-2 border-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
                       Grafik
                     </Tab>
-                    <Tab className="px-2 py-2 text-base font-medium text-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
+                    <Tab className="md:px-2 px-1 py-2 text-xs md:text-base font-medium text-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
                       Location
                     </Tab>
                   </TabList>
                   <TabPanels>
                     <TabPanel>
-                      <h1 className="py-2 font-bold text-2xl">
+                      <h1 className="py-2 font-bold md:text-2xl text-lg">
                         PUMMA U-TEWS 003
                       </h1>
-                      <p className="py-4 mb-3 text-xl font-normal">
+                      <p className="py-4 mb-3 md:text-xl text-base font-normal">
                         Panjang
                       </p>
-                      <div className="mx-4 space-y-9 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0  md:justify-start md:gap-5 md:flex md:flex-wrap">
-                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center w-[19rem] h-36 ">
+                      <div className="md:mx-5 space-y-9 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0  md:justify-start md:gap-5 md:flex md:flex-wrap">
+                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
-                              <p className="font-semibold text-xl">
+                              <p className="font-semibold md:text-xl text-lg">
                                 Battery Voltage
                               </p>
                             </div>
-                            <div className="text-3xl font-semibold justify-between flex space-x-5 items-center">
+                            <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
                               {dataApi.result?.[99]?.voltage && (
                                 <p>{`${dataApi.result[99].voltage} V`}</p>
                               )}
@@ -183,14 +183,14 @@ const Index = ({
                             </div>
                           </div>
                         </div>
-                        <div className="bg-white border px-3 py-3 drop-shadow-lg flex items-center rounded-lg w-[19rem] h-36 ">
+                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
-                              <p className="font-semibold text-xl">
+                              <p className="font-semibold md:text-xl text-lg">
                                 Device Temperature
                               </p>
                             </div>
-                            <div className="pt-2 text-3xl font-semibold justify-between flex space-x-5 items-center">
+                            <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
                               {dataApi.result?.[99]?.temperature && (
                                 <p>{`${dataApi.result[99].temperature} °C`}</p>
                               )}
@@ -210,14 +210,14 @@ const Index = ({
                             </div>
                           </div>
                         </div>
-                        <div className="bg-white border px-3 py-3 drop-shadow-lg flex items-center rounded-lg w-[19rem] h-36 ">
+                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
-                              <p className="font-semibold text-xl">
+                              <p className="font-semibold md:text-xl text-lg">
                                 Sea Water Level
                               </p>
                             </div>
-                            <div className="pt-2 text-3xl font-semibold justify-between flex space-x-5 items-center">
+                            <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
                               {dataApi.result?.[99]?.waterlevel && (
                                 <p>{`${dataApi.result[99].waterlevel} cm`}</p>
                               )}
@@ -237,12 +237,12 @@ const Index = ({
                             </div>
                           </div>
                         </div>
-                        <div className="bg-white border px-3 py-3 drop-shadow-lg flex items-center rounded-lg w-[19rem] h-36">
+                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
-                              <p className="font-semibold text-xl">Forcast30</p>
+                              <p className="font-semibold md:text-xl text-lg">Forcast30</p>
                             </div>
-                            <div className="pt-2 text-3xl font-semibold justify-between flex space-x-5 items-center">
+                            <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
                               {dataApi.result?.[99]?.forecast30 && (
                                 <p>{`${dataApi.result[99].forecast30} cm`}</p>
                               )}
@@ -262,14 +262,14 @@ const Index = ({
                             </div>
                           </div>
                         </div>
-                        <div className="bg-white border px-3 py-3 drop-shadow-lg flex items-center rounded-lg w-[19rem] h-36">
+                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
-                              <p className="font-semibold text-xl">
+                              <p className="font-semibold md:text-xl text-lg">
                                 Forcast300
                               </p>
                             </div>
-                            <div className="pt-2 text-3xl font-semibold drop-shadow-lg justify-between flex space-x-5 items-center">
+                            <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
                               {dataApi.result?.[99]?.forecast30 && (
                                 <p>{`${dataApi.result[99].forecast30} cm`}</p>
                               )}
@@ -289,12 +289,12 @@ const Index = ({
                             </div>
                           </div>
                         </div>
-                        <div className="bg-white border drop-shadow-lg px-3 py-3  flex items-center rounded-lg w-[19rem] h-36">
+                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
-                              <p className="font-semibold text-xl">Status</p>
+                              <p className="font-semibold md:text-xl text-lg">Status</p>
                             </div>
-                            <div className="pt-2 text-3xl font-semibold justify-between flex space-x-5 items-center">
+                            <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
                               {dataApi.result?.[99]?.alertlevel && (
                                 <p
                                   className={`${
@@ -332,10 +332,10 @@ const Index = ({
                     </TabPanel>
                     <TabPanel>
                       {" "}
-                      <h1 className="py-2 font-bold text-2xl">
+                      <h1 className="py-2 font-bold md:text-2xl text-lg">
                         PUMMA U-TEWS 003
                       </h1>
-                      <p className="py-1 text-xl font-normal py-3">
+                      <p className="py-4 mb-3 md:text-xl text-base font-normal">
                         Panjang
                       </p>
                       <div className="grid text-center">
@@ -344,10 +344,10 @@ const Index = ({
                     </TabPanel>
                     <TabPanel>
                       {" "}
-                      <h1 className="py-2 font-bold text-2xl">
+                      <h1 className="py-2 font-bold md:text-2xl text-lg">
                         PUMMA U-TEWS 003
                       </h1>
-                      <p className="py-2 pb-3 text-xl font-normal">Panjang</p>
+                      <p className="py-4 mb-3 md:text-xl text-base font-normal">Panjang</p>
                       <div className="border border-black overflow-hidden bg-white w-fit rounded-lg py-1">
                         <select value={timeFrame} onChange={handleSelectChange}>
                           <option value="minute">Minutes</option>
@@ -425,10 +425,10 @@ const Index = ({
                       </div>
                     </TabPanel>
                     <TabPanel>
-                      <h1 className="py-2 font-bold text-2xl">
+                      <h1 className="py-2 font-bold md:text-2xl text-lg">
                         PUMMA U-TEWS 003
                       </h1>
-                      <p className="py-1 text-xl font-normal">Panjang</p>
+                      <p className="py-4 mb-3 md:text-xl text-base font-normal">Panjang</p>
                       <div className=" px-3 py-3 w-full  flex items-center rounded-sm">
                         <div className="w-[100%] h-[100%] overflow-hidden">
                         <SimpleMap latitude={-5.5875317} longitude={105.2264902} />

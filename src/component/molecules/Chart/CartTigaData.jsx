@@ -95,7 +95,7 @@ const CartTigaData = ({
   };
 
   return (
-    <div>
+    <div className="w-full w-fit">
       <Line options={options} data={DataChart} />
     </div>
   );

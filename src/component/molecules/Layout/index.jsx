@@ -31,7 +31,7 @@ const Index = () => {
   return (
     <section className="bg-slate-100 flex items-center overflow-hidden h-screen">
       <div
-        className={`bg-slate-100 ${isFalse === false ? "w-1/12" : "w-24"}   ${
+        className={`bg-slate-100 ${isFalse === false ? "w-3/12 md:w-1/12" : "w-24"}   ${
           burger === false
             ? "absolute -translate-x-[700px] transition ease-in duration-300 bg-white"
             : " translate-x-0 transition ease-out duration-300"
@@ -50,8 +50,8 @@ const Index = () => {
             setBurgers={setBurgers}
         />
       </div>
-      <div className="w-11/12  h-screen overflow-clip flex flex-col" onClick={handleCloseSidebar}>
-        {/* <div className="h-12 px-5 flex items-center">
+      <div className="w-full h-screen overflow-clip flex flex-col" onClick={handleCloseSidebar}>
+        <div className="h-12 px-5 flex items-center">
           <Navbar
             isFalse={isFalse}
             setIsfalse={setIsfalse}
@@ -60,8 +60,8 @@ const Index = () => {
             burgers={burgers}
             setBurgers={setBurgers}
           />
-        </div> */}
-        <div className="overflow-y-scroll p-5 w-auto h-screen scrollbar-hide bg-slate-100">
+        </div>
+        <div className="overflow-y-scroll md:p-2 p-5 w-auto h-screen scrollbar-hide bg-slate-100">
           <Route />
         </div>
       </div>

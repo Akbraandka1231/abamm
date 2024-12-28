@@ -77,7 +77,7 @@ const Index = ({ DataLine, name, labelname, borderColor, bgcolor, index, Combine
   };
 
   return (
-    <div>
+    <div className="w-full w-fit">
       <Line options={options} data={DataChart}  className={`${DataLine ? '' : ''}`} />
     </div>
   );
