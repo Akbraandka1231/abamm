@@ -81,12 +81,13 @@ const Index = ({ dataPumma }) => {
                         {i + 1}
                       </td>
                       <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                        {new Date(item.datetime).toLocaleDateString("en-US")}
+                        {new Intl.DateTimeFormat("id-ID", {
+                          timeZone: "Asia/Jakarta",
+                        }).format(new Date(item.datetime))}
                       </td>
                       <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                        {new Date(item.datetime).toLocaleTimeString("en-US", {
-                          hour12: false,
-                        })}
+                        {item.datetime.split("T")[1].split(".")[0]}{" "}
+                        {/* Menampilkan hanya jam, menit, dan detik */}
                       </td>
                       <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
                         {item.waterlevel}
