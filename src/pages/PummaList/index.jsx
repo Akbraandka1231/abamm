@@ -40,6 +40,9 @@ const Index = () => {
 
                         <h1 className="max-[375px]:text-xs min-[450px]:text-lg font-semibold sm:text-base text-sm">{item.name5}</h1>
                         <p className="min-[450px]:text-base font-normal md:text-sm text-xs">{item.nameLocation5}</p>
+
+                        <h1 className="max-[375px]:text-xs min-[450px]:text-lg font-semibold sm:text-base text-sm">{item.name6}</h1>
+                        <p className="min-[450px]:text-base font-normal md:text-sm text-xs">{item.nameLocation6}</p>
                       </div>
                   );
                 })}

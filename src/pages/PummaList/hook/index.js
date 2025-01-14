@@ -87,9 +87,14 @@ const Index = () => {
       link: "/pumma-marina",
     },
     {
-      name4 : "PUMMA U-TEWS 005",
-      nameLocation4 : "Pangandaran",
+      name5 : "PUMMA U-TEWS 005",
+      nameLocation5 : "Pangandaran",
       link: "/pumma-pangandaran"
+    },
+    {
+      name6 : "PUMMA U-TEWS 006",
+      nameLocation6 : "Pulau Sebesi",
+      link: "/pumma-psebesi"
     }
   ];
   return { dataPumma , data, ElapsedTime };

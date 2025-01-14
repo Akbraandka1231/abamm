@@ -158,7 +158,7 @@ const Index = ({
                         PUMMA U-TEWS 005
                       </h1>
                       <p className="py-4 mb-3 md:text-xl text-base font-normal">Pangandaran</p>
-                      <div className="md:mx-5 space-y-9 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0  md:justify-start md:gap-5 md:flex md:flex-wrap">
+                      <div className="md:px-16 md:mx-5 space-y-9 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0  md:justify-start md:gap-5 md:flex md:flex-wrap">
                         <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">

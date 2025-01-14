@@ -1,12 +1,31 @@
-
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useLocation, useNavigate } from "react-router";
 
 const Index = ({ isFalse, setIsfalse, setBurger, setBurgers }) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  
-
- 
-
+  const handleclikHome = () => {
+    navigate("/");
+    if (window.innerWidth < 640) {
+      setBurger(false);
+      setBurgers(false);
+    }
+  };
+  const handleclikDashboard = () => {
+    navigate("/pumma");
+    if (window.innerWidth < 640) {
+      setBurger(false);
+      setBurgers(false);
+    }
+  };
+  const handleclikMembers = () => {
+    navigate("/");
+    if (window.innerWidth < 640) {
+      setBurger(false);
+      setBurgers(false);
+    }
+  };
   return (
     <div className="overflow-y-hidden overflow-x-hidden text-xs font-medium w-full flex justify-between items-center">
       <div className="flex items-center space-x-3">
@@ -20,10 +39,46 @@ const Index = ({ isFalse, setIsfalse, setBurger, setBurgers }) => {
           />
         </div>
       </div>
-      <div className="flex space-x-6 items-center">
-        <div className="flex space-x-5">
-          <div className="">
-            <h1>PUMMA Information</h1>
+      <div className="h-12 flex items-center justify-between px-4 text-black text-sm font-bold">
+        <div className="px-1">
+          <div onClick={handleclikHome} className="py-3 ">
+            <h1
+              className={`text-sm  font-bold ${
+                pathname === "/"
+                  ? "text-white bg-[#2E3192] rounded-lg py-1 px-3"
+                  : "text-black py-1 px-3"
+              } ${isFalse === true ? "scale-0 hidden" : "scale-100"}`}
+            >
+              Home
+            </h1>
+          </div>
+        </div>
+        <div className="px-1">
+          <div onClick={handleclikDashboard} className="py-3 ">
+            <h1
+              className={`text-sm  font-bold ${
+                pathname === "/pumma" ||
+                pathname === "/pumma-gebang" ||
+                pathname === "/pumma-canti" ||
+                pathname === "/pumma-panjang" ||
+                pathname === "/pumma-marina" ||
+                pathname === "/pumma-pangandaran" ||
+                pathname === "/pumma-psebesi" ||
+                pathname === "/climatologi" ||
+                pathname === "/climatologi-canti" ||
+                pathname === "/ubuoy" ||
+                pathname === "/ubuoy-001"
+                  ? "text-white bg-[#2E3192] rounded-lg py-1 px-3"
+                  : "text-black py-1 px-3"
+              } ${isFalse === true ? "scale-0 hidden" : "scale-100"}`}
+            >
+              Dashboard
+            </h1>
+          </div>
+        </div>
+        <div className="px-1">
+          <div className="py-1 px-3 " onClick={handleclikMembers}>
+            <h1>Members</h1>
           </div>
         </div>
       </div>

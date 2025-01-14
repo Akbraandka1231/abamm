@@ -42,36 +42,58 @@ const Index = ({
     const fetchData = async () => {
       try {
         let responseDataChart;
-        if (timeFrame === "7days") {
-          responseDataChart = await axios.get(
-            "https://c-greenproject.org:4443/marinaj/interval/?time=7%20days"
-          );
-        } else if (timeFrame === "30days") {
-          responseDataChart = await axios.get(
-            "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
-          );
-        } else {
-          responseDataChart = await axios.get(
-            `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
-          );
+        
+        // Define the API endpoints based on timeFrame
+        switch(timeFrame) {
+          case "minute":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=60%20second"
+            );
+            break;
+          case "hour":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=1%20hour"
+            );
+            break;
+            case "day":
+              responseDataChart = await axios.get(
+                "https://c-greenproject.org:4443/marinaj/interval/?time=1%20day"
+              );
+              break;
+          case "7days":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=7%20day"
+            );
+            break;
+          case "30days":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
+            );
+            break;
+          default:
+            // Handle day timeFrame or any other cases
+            responseDataChart = await axios.get(
+              `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
+            );
         }
-
-        console.log(responseDataChart.data);
+  
         setDataChart(responseDataChart.data);
-        console.log(dataChart, timeFrame);
+        console.log("Response data:", responseDataChart.data);
+        console.log("Current timeFrame:", timeFrame);
       } catch (err) {
-        console.log(err.message);
+        console.log("Error fetching data:", err.message);
       }
     };
-
+  
+    // Initial fetch
     fetchData();
-
-    const interval = setInterval(() => {
-      fetchData();
-    }, 5000);
-
+  
+    // Set up polling interval
+    const interval = setInterval(fetchData, 5000);
+  
+    // Cleanup interval on unmount or timeFrame change
     return () => clearInterval(interval);
-  }, [timeFrame, dataChart]);
+  }, [timeFrame]); // Removed dataChart from dependencies to avoid infinite loop
 
   useEffect(() => {
     const fetchData = async () => {
@@ -155,7 +177,7 @@ const Index = ({
                       <p className="py-4 mb-3 md:text-xl text-base font-normal">
                         Marina Jambu
                       </p>
-                      <div className="md:mx-5 space-y-9 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0  md:justify-start md:gap-5 md:flex md:flex-wrap">
+                      <div className="md:px-16 md:mx-5 space-y-9 sm:grid sm:grid-cols-2 sm:gap-5 sm:space-y-0  md:justify-start md:gap-5 md:flex md:flex-wrap">
                         <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">

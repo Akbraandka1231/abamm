@@ -10,5 +10,6 @@ import BasePumma4 from './basePumma4'
 import BasePumma5 from './basePumma5'
 import BaseClimatogi1 from './baseClimatologi1'
 import BaseUbuoy1 from './baseUbuoy1'
+import BasePumma6 from './basePumma6'
 
-export {PummaCanti, PummaList, UbuoyList, ClimatologiList,  Home, BasePumma1, BasePumma2,BasePumma3, BasePumma4, BasePumma5, BaseClimatogi1, BaseUbuoy1 }
+export {PummaCanti, PummaList, UbuoyList, ClimatologiList,  Home, BasePumma1, BasePumma2,BasePumma3, BasePumma4, BasePumma5, BasePumma6, BaseClimatogi1, BaseUbuoy1,}
