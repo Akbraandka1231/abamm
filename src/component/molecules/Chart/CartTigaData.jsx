@@ -25,13 +25,21 @@ const CartTigaData = ({
   bgcolor3,
   index3,
 }) => {
+  const now = new Date(); // Waktu saat ini
+
+  // Filter data yang hanya terjadi hingga sekarang
+  const filteredDataLine = DataLine.filter((item) => new Date(item[0]) <= now);
+
+  // Data untuk sumbu X (timestamp)
+  const labels = filteredDataLine.map((item) => {
+    const { times, dates } = time(item[0]);
+    return timeFrame === "7 days" || timeFrame === "30 days" ? dates : times;
+  });
+
   // Data untuk grafik
   const DataChart = {
     type: "line",
-    labels: DataLine?.map((item) => {
-      const { times, dates } = time(item[0]); // Asumsikan fungsi time memberikan waktu dan tanggal
-      return timeFrame === "7 days" || timeFrame === "30 days" ? dates : times; // Tampilkan tanggal untuk 7/30 hari, waktu untuk lainnya
-    }),
+    labels: labels, // Gunakan timestamp hasil filter
     datasets: [
       {
         label: labelname1,
@@ -39,7 +47,7 @@ const CartTigaData = ({
         borderColor: borderColor1,
         pointBorderColor: "transparent",
         pointBackgroundColor: "transparent",
-        data: DataLine?.map((data) => data[index1]),
+        data: filteredDataLine.map((data) => data[index1]), // Data sesuai filter
       },
       {
         label: labelname2,
@@ -47,7 +55,7 @@ const CartTigaData = ({
         borderColor: borderColor2,
         pointBorderColor: "transparent",
         pointBackgroundColor: "transparent",
-        data: DataLine?.map((data) => data[index2]),
+        data: filteredDataLine.map((data) => data[index2]), // Data sesuai filter
       },
       {
         label: labelname3,
@@ -55,7 +63,7 @@ const CartTigaData = ({
         borderColor: borderColor3,
         pointBorderColor: "transparent",
         pointBackgroundColor: "transparent",
-        data: DataLine?.map((data) => data[index3]),
+        data: filteredDataLine.map((data) => data[index3]), // Data sesuai filter
       },
     ],
   };
@@ -95,7 +103,7 @@ const CartTigaData = ({
   };
 
   return (
-    <div className="w-full w-fit">
+    <div>
       <Line options={options} data={DataChart} />
     </div>
   );

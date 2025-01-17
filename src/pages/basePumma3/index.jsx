@@ -141,7 +141,7 @@ const Index = ({
                       Table
                     </Tab>
                     <Tab className="md:px-2 px-1 py-2 text-xs md:text-base font-medium text-[#2E3192] border-r-2 border-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
-                      Grafik
+                      Chart
                     </Tab>
                     <Tab className="md:px-2 px-1 py-2 text-xs md:text-base font-medium text-[#2E3192] data-[selected]:bg-[#2E3192] data-[selected]:text-white data-[hover] data-[selected]:font-medium">
                       Location
