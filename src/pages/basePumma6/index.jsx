@@ -1,9 +1,10 @@
 import React from "react";
-import { Chart, SimpleMap, Tabel } from "../../component/molecules";
+import { Chart, SimpleMap } from "../../component/molecules";
 import CartTigaData from "../../component/molecules/Chart/CartTigaData";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import  Table  from "../../component/molecules/TableSebesi";
 
 const Index = ({
   datarealtime,
@@ -14,7 +15,11 @@ const Index = ({
   setDataGrafik,
   location,
 }) => {
-  const [dataApi, setData] = useState([]);
+  const [dataPummaSebesi, setDataPummaSebesi] = useState([]);
+  const [dataDevice, setDataDevice] = useState([]);
+  const [dataSerial, setDataSerial] = useState([]);
+  const [dataTablePummaSebesi, setDataTablePummaSebesi] = useState([]);
+  const [dataClimate, setDataClimate] = useState([]);
   const [dataChart, setDataChart] = useState([]);
   const [timeFrame, setTimeFrame] = useState("minute");
   const [dataCamera, setDataCamera] = useState([]);
@@ -23,10 +28,94 @@ const Index = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://c-greenproject.org:4443/petengoran/latest"
+          "https://c-greenproject.org:7070/pumma_latest"
         );
         console.log(response.data);
-        setData(response.data);
+        setDataPummaSebesi(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:7070/climate_latest"
+        );
+        console.log(response.data);
+        setDataClimate(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:7070/device_latest"
+        );
+        console.log(response.data);
+        setDataDevice(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:7070/serial_latest"
+        );
+        console.log(response.data);
+        setDataSerial(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:7070/pumma_latest10"
+        );
+        console.log(response.data);
+        setDataTablePummaSebesi(response.data);
       } catch (err) {
         console.log(err.message);
       }
@@ -107,17 +196,20 @@ const Index = ({
     setTimeFrame(event.target.value);
   };
 
-  const checkAlertLevelSafety = (alertLevel) => {
-    const level = Number(alertLevel);
-
-    if (isNaN(level)) {
+  const checkAlertLevelSafety = (Alert_Level) => {
+    const level = Number(Alert_Level);
+    
+    if (isNaN(level) || Alert_Level === null || Alert_Level === undefined) {
       return {
         status: "Tidak Diketahui",
         color: "text-gray-500",
       };
     }
 
-    if (level >= dataApi.result?.[99]?.threshold) {
+    // Jika threshold tidak terdefinisi, asumsi default adalah 0
+    const threshold = dataPummaSebesi.Threshold || 0;
+
+    if (level >= threshold) {
       return {
         status: "DANGER",
         color: "text-red-600",
@@ -128,7 +220,7 @@ const Index = ({
         color: "text-green-600",
       };
     }
-  };
+};
 
   return (
     <div className="flex flex-col">
@@ -169,8 +261,8 @@ const Index = ({
                               </p>
                             </div>
                             <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.voltage && (
-                                <p>{`${dataApi.result[99].voltage} V`}</p>
+                              {dataDevice.battery_voltage && (
+                                <p>{`${dataDevice.battery_voltage} V`}</p>
                               )}
                               <svg
                                 width="90"
@@ -192,12 +284,12 @@ const Index = ({
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
                               <p className="font-semibold md:text-xl text-lg">
-                                Device Temperature
+                                Raspi Temperature
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.temperature && (
-                                <p>{`${dataApi.result[99].temperature} °C`}</p>
+                              {dataDevice.raspi_temperature&& (
+                                <p>{`${dataDevice.raspi_temperature} °C`}</p>
                               )}
                               <svg
                                 width="90"
@@ -215,7 +307,7 @@ const Index = ({
                             </div>
                           </div>
                         </div>
-                        <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
+                        {<div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
                               <p className="font-semibold md:text-xl text-lg">
@@ -223,8 +315,8 @@ const Index = ({
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.waterlevel && (
-                                <p>{`${dataApi.result[99].waterlevel} cm`}</p>
+                              {dataPummaSebesi.Water_level_Pressure && (
+                                <p>{`${dataPummaSebesi.Water_level_Pressure} cm`}</p>
                               )}
                               <svg
                                 width="90"
@@ -241,7 +333,7 @@ const Index = ({
                               </svg>
                             </div>
                           </div>
-                        </div>
+                        </div>}
                         <div className="border bg-white drop-shadow-lg rounded-lg px-3 flex items-center md:w-[19rem] w-[15rem] h-36">
                           <div className="w-full">
                             <div className="flex space-x-4 items-center">
@@ -250,8 +342,8 @@ const Index = ({
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.forecast30 && (
-                                <p>{`${dataApi.result[99].forecast30} cm`}</p>
+                              {dataPummaSebesi.For30 && (
+                                <p>{`${dataPummaSebesi.For30} cm`}</p>
                               )}
                               <svg
                                 width="90"
@@ -277,8 +369,8 @@ const Index = ({
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold drop-shadow-lg justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.forecast30 && (
-                                <p>{`${dataApi.result[99].forecast30} cm`}</p>
+                              {dataPummaSebesi.For300 && (
+                                <p>{`${dataPummaSebesi.For300} cm`}</p>
                               )}
                               <svg
                                 width="90"
@@ -304,21 +396,11 @@ const Index = ({
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.alertlevel && (
-                                <p
-                                  className={`${
-                                    checkAlertLevelSafety(
-                                      dataApi.result[99].alertlevel
-                                    ).color
-                                  }`}
-                                >
-                                  {
-                                    checkAlertLevelSafety(
-                                      dataApi.result[99].alertlevel
-                                    ).status
-                                  }
-                                </p>
-                              )}
+                            {typeof dataPummaSebesi.Alert_Level !== "undefined" && (
+  <p className={`${checkAlertLevelSafety(dataPummaSebesi.Alert_Level).color}`}>
+    {checkAlertLevelSafety(dataPummaSebesi.Alert_Level).status}
+  </p>
+)}
                               <svg
                                 width="90"
                                 height="80"
@@ -345,8 +427,8 @@ const Index = ({
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold drop-shadow-lg justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.forecast30 && (
-                                <p>{`${dataApi.result[99].forecast30} m`}</p>
+                              {dataClimate.AirPressure&& (
+                                <p>{`${dataClimate.AirPressure} m`}</p>
                               )}
                               <svg
                                 width="78"
@@ -375,8 +457,8 @@ const Index = ({
                               </p>
                             </div>
                             <div className="pt-2 md:text-3xl text-xl font-semibold drop-shadow-lg justify-between flex space-x-5 items-center">
-                              {dataApi.result?.[99]?.forecast30 && (
-                                <p>{`${dataApi.result[99].forecast30} m`}</p>
+                              {dataSerial.maxbotic2 && (
+                                <p>{`${dataSerial.maxbotic2} m`}</p>
                               )}
                               <svg
                                 width="100"
@@ -402,8 +484,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`27,89 V`}</p>
-
+                              {dataDevice.pv_voltage && (
+                                <p>{`${dataDevice.pv_voltage} V`}</p>
+                              )}
                                 <svg
                                   width="90"
                                   height="80"
@@ -428,7 +511,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`2.61 A`}</p>
+                              {dataDevice.pv_current && (
+                                <p>{`${dataDevice.pv_current} A`}</p>
+                              )}
 
                                 <svg
                                   width="90"
@@ -454,8 +539,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`2.32 A`}</p>
-
+                              {dataDevice.battery_charger_current && (
+                                <p>{`${dataDevice.battery_charger_current} A`}</p>
+                              )}
                                 <svg
                                   width="90"
                                   height="80"
@@ -482,8 +568,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`TIMUR`}</p>
-
+                              {dataClimate.Direction && (
+                                <p>{`${dataClimate.Direction}`}</p>
+                              )}
                                 <svg
                                   width="100"
                                   height="87"
@@ -511,7 +598,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`2.61 m/s`}</p>
+                              {dataClimate.AnemometerSpeed && (
+                                <p>{`${dataClimate.AnemometerSpeed}`} m/s</p>
+                              )}
 
                                 <svg
                                   width="100"
@@ -543,7 +632,7 @@ const Index = ({
                         Pulau Sebesi
                       </p>
                       <div className="grid text-center">
-                        <Tabel dataPumma={dataApi} />
+                        <Table dataTablePummaSebesi={dataTablePummaSebesi} />
                       </div>
                     </TabPanel>
                     <TabPanel>
