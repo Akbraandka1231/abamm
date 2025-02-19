@@ -1,11 +1,10 @@
 import React from "react";
 import { Chart, SimpleMap } from "../../component/molecules";
 import CartTigaData from "../../component/molecules/Chart/CartTigaData";
-import TableBuoy from "../../component/molecules/TabelBuoy";
-import { TableFCBuoy } from "../../component/molecules";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import TableModbus from "../../component/molecules/TableModbus";
 
 const Index = ({
   datarealtime,
@@ -17,16 +16,60 @@ const Index = ({
   location,
 }) => {
   const [dataBuoy, setDataBuoy] = useState([]);
-  const [dataFCBuoy, setFCDataBuoy] = useState([]);
+  const [dataSerial, setDataSerial] = useState([]);
+  const [dataScc, setDataScc] = useState([]);
+  const [dataGPS, setDataGPS] = useState([]);
+  const [dataTableModbus, setDataTableModbus] = useState([]);
   const [dataChart, setDataChart] = useState([]);
   const [timeFrame, setTimeFrame] = useState("minute");
   // const [dataCamera, setDataCamera] = useState([]);
+  const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
+
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      try {
+        const response = await fetch("https://c-greenproject.org:8040/gps_latest");
+        const data = await response.json();
+
+        if (data && data.latitude && data.longitude) {
+          setCoordinates({ latitude: data.latitude, longitude: data.longitude });
+        }
+      } catch (error) {
+        console.error("Error fetching GPS data:", error);
+      }
+    };
+
+    fetchCoordinates();
+  }, []);
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:8040/modbus_latest10"
+        );
+        console.log(response.data);
+        setDataTableModbus(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://c-greenproject.org:4443/petengoran/latest"
+          "https://c-greenproject.org:8040/modbus_latest"
         );
         setDataBuoy(response.data);
       } catch (err) {
@@ -44,9 +87,28 @@ const Index = ({
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://c-greenproject.org:4443/petengoran/latest"
+          "https://c-greenproject.org:8040/scc_latest"
         );
-        setFCDataBuoy(response.data);
+        setDataScc(response.data);
+      } catch (err) {
+        console.error("Error fetching data:", err.message);
+      }
+    };
+
+    fetchData();
+
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:8040/serial_latest"
+        );
+        setDataSerial(response.data);
       } catch (err) {
         console.error("Error fetching data:", err.message);
       }
@@ -61,37 +123,20 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let responseDataChart;
-        if (timeFrame === "7days") {
-          responseDataChart = await axios.get(
-            "https://c-greenproject.org:4443/petengoran/interval/?time=7%20days"
-          );
-        } else if (timeFrame === "30days") {
-          responseDataChart = await axios.get(
-            "https://c-greenproject.org:4443/petengoran/interval/?time=30%20days"
-          );
-        } else {
-          responseDataChart = await axios.get(
-            `https://c-greenproject.org:4443/petengoran/all/1?timer=${timeFrame}`
-          );
-        }
-
-        console.log(responseDataChart.data);
-        setDataChart(responseDataChart.data);
-        console.log(dataChart, timeFrame);
+        const response = await axios.get(
+          "https://c-greenproject.org:8040/gps_latest"
+        );
+        setDataGPS(response.data);
       } catch (err) {
-        console.log(err.message);
+        console.error("Error fetching data:", err.message);
       }
     };
 
     fetchData();
 
-    const interval = setInterval(() => {
-      fetchData();
-    }, 5000);
-
+    const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
-  }, [timeFrame, dataChart]);
+  }, []);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -145,6 +190,7 @@ const Index = ({
   //   }
   // };
 
+
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto">
@@ -173,6 +219,9 @@ const Index = ({
                         Ubuoy 001
                       </h1>
                       <p className="py-4 mb-3 md:text-xl text-base font-normal">
+                        Pulau Sebesi
+                      </p>
+                      <p className="py-4 mb-3 md:text-xl text-base font-normal">
                         EWS Buoy
                       </p>
                       <div className="px-4">
@@ -185,7 +234,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`13 V`}</p>
+                              {dataScc.battery_voltage && (
+                                <p>{`${dataScc.battery_voltage} V`}</p>
+                              )}
 
                                 <svg
                                   width="90"
@@ -211,8 +262,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`54 °C`}</p>
-
+                              {dataSerial.temperature && (
+                                <p>{`${dataSerial.temperature} °C`}</p>
+                              )}
                                 <svg
                                   width="90"
                                   height="80"
@@ -237,8 +289,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`112 cm`}</p>
-
+                              {dataBuoy.WaterLevel && (
+                                <p>{`${dataBuoy.WaterLevel} m`}</p>
+                              )}
                                 <svg
                                   width="90"
                                   height="80"
@@ -263,7 +316,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`27,89 V`}</p>
+                              {dataScc.pv_voltage && (
+                                <p>{`${dataScc.pv_voltage} V`}</p>
+                              )}
 
                                 <svg
                                   width="90"
@@ -289,8 +344,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`2.61 A`}</p>
-
+                              {dataScc.pv_current && (
+                                <p>{`${dataScc.pv_current} A`}</p>
+                              )}
                                 <svg
                                   width="90"
                                   height="80"
@@ -315,8 +371,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`2.32 A`}</p>
-
+                              {dataScc.battery_charge_current && (
+                                <p>{`${dataScc.battery_charge_current} A`}</p>
+                              )}
                                 <svg
                                   width="90"
                                   height="80"
@@ -343,8 +400,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`TIMUR`}</p>
-
+                              {dataBuoy.Direction&& (
+                                <p>{`${dataBuoy.Direction}`}</p>
+                              )}
                                 <svg
                                   width="100"
                                   height="87"
@@ -372,8 +430,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`2.61 m/s`}</p>
-
+                              {dataBuoy.AnemometerSpeed && (
+                                <p>{`${dataBuoy.AnemometerSpeed} m/s`}</p>
+                              )}
                                 <svg
                                   width="100"
                                   height="87"
@@ -407,8 +466,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`0.71 °`}</p>
-
+                              {dataSerial.xangle && (
+                                <p>{`${dataSerial.xangle} °`}</p>
+                              )}
                                 <svg
                                   width="95"
                                   height="85"
@@ -443,8 +503,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`-4.39 °`}</p>
-
+                              {dataSerial.yangle && (
+                                <p>{`${dataSerial.yangle} °`}</p>
+                              )}
                                 <svg
                                   width="95"
                                   height="85"
@@ -479,7 +540,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`342.9 °`}</p>
+                              {dataSerial.zangle && (
+                                <p>{`${dataSerial.zangle} °`}</p>
+                              )}
                                 <svg
                                   width="95"
                                   height="85"
@@ -514,8 +577,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`18 °`}</p>
-
+                              {dataBuoy.Angle && (
+                                <p>{`${dataBuoy.Angle} °`}</p>
+                              )}
                                 <svg
                                   width="100"
                                   height="90"
@@ -556,7 +620,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`-5.361595`}</p>
+                              {dataGPS.latitude && (
+                                <p>{`${dataGPS.latitude} °`}</p>
+                              )}
 
                                 <svg
                                   width="70"
@@ -595,7 +661,9 @@ const Index = ({
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
-                                <p>{`105.242932`}</p>
+                              {dataGPS.longitude && (
+                                <p>{`${dataGPS.longitude} °`}</p>
+                              )}
 
                                 <svg
                                   width="70"
@@ -639,13 +707,12 @@ const Index = ({
                           EWS Buoy
                         </p>
                         <div className="grid text-center">
-                          <TableBuoy dataBuoy={dataBuoy} />
-                        </div>
+                        <TableModbus dataTableModbus={dataTableModbus} />
+                      </div>
                         <p className="py-4 mt-3 md:text-xl text-base font-normal">
                           FC Buoy
                         </p>
-                        <div className="grid text-center">
-                          <TableFCBuoy dataFCBuoy={dataFCBuoy} />
+                        <div className="grid text-center">   
                         </div>
                       </div>
                     </TabPanel>
@@ -741,12 +808,9 @@ const Index = ({
                         EWS Buoy
                       </p>
                       <div className=" px-3 py-3 w-full  flex items-center rounded-sm">
-                        <div className="w-[100%] h-[100%] overflow-hidden">
-                          <SimpleMap
-                            latitude={-6.1890307}
-                            longitude={105.840654}
-                          />
-                        </div>
+                      <div className="w-[100%] h-[100%] overflow-hidden">
+      <SimpleMap latitude={coordinates.latitude} longitude={coordinates.longitude} />
+    </div>
                       </div>
                     </TabPanel>
                   </TabPanels>
