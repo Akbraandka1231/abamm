@@ -1,7 +1,7 @@
 import React from "react";
 
-const Index = ({ dataTablePummaSebesi }) => {
-  console.log(dataTablePummaSebesi);
+const Index = ({ dataTableClimate }) => {
+  console.log(dataTableClimate);
   return (
     <div className="flex flex-col overflow-hidden over">
       <div className="overflow-x-scroll">
@@ -20,27 +20,42 @@ const Index = ({ dataTablePummaSebesi }) => {
                     Time
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Water Level Pressure
+                  Anemometer Speed
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Alert Signal
+                  Beaufort scale
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                    Forcast 30
+                  Angle
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                    Forcast 300
+                  Direction
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Threshold
+                  Rainfall
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  rms
+                  Suhu Air Atas
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  Suhu Air Bawah
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  Humidity
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  Temperature
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  Solar Radiation
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  AirPressure
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {dataTablePummaSebesi?.slice().map((item, i) => (
+                {dataTableClimate?.slice().map((item, i) => (
                   <tr key={i}>
                     <td className="px-6 py-3 text-xs font-medium text-gray-800 whitespace-nowrap">
                       {i + 1}
@@ -55,22 +70,37 @@ const Index = ({ dataTablePummaSebesi }) => {
                       {/* Menampilkan hanya jam, menit, dan detik */}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.Water_level_Pressure}
+                      {item.AnemometerSpeed}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.Alert_Signal}
+                      {item.Beaufort_scale}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.For30}
+                      {item.Angle}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.For300}
+                      {item.Direction}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
-                      {item.Threshold}
+                      {item.Rainfall}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
-                      {item.rms}
+                      {item.Suhu_Air_Atas}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.Suhu_Air_Bawah}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.Humidity}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.Temperature}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.SolarRadiation}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.AirPressure}
                     </td>
                   </tr>
                 ))}

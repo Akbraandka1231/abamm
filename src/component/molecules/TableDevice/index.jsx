@@ -1,7 +1,7 @@
 import React from "react";
 
-const Index = ({ dataTablePummaSebesi }) => {
-  console.log(dataTablePummaSebesi);
+const Index = ({ dataTableDevice }) => {
+  console.log(dataTableDevice);
   return (
     <div className="flex flex-col overflow-hidden over">
       <div className="overflow-x-scroll">
@@ -20,27 +20,33 @@ const Index = ({ dataTablePummaSebesi }) => {
                     Time
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Water Level Pressure
+                  PV Voltage
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Alert Signal
+                  PV Current
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                    Forcast 30
+                  PV Power
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                    Forcast 300
+                  Battery Voltage
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Threshold
+                  Battery Charger Current
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  rms
+                  Device Current
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  device Power
+                  </th>
+                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
+                  Raspi Temperature
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {dataTablePummaSebesi?.slice().map((item, i) => (
+                {dataTableDevice?.slice().map((item, i) => (
                   <tr key={i}>
                     <td className="px-6 py-3 text-xs font-medium text-gray-800 whitespace-nowrap">
                       {i + 1}
@@ -55,22 +61,28 @@ const Index = ({ dataTablePummaSebesi }) => {
                       {/* Menampilkan hanya jam, menit, dan detik */}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.Water_level_Pressure}
+                      {item.pv_voltage}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.Alert_Signal}
+                      {item.pv_current}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.For30}
+                      {item.pv_power}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.For300}
+                      {item.battery_voltage}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
-                      {item.Threshold}
+                      {item.battery_charger_current}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
-                      {item.rms}
+                      {item.device_current}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.device_power}
+                    </td>
+                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
+                      {item.raspi_temperature}
                     </td>
                   </tr>
                 ))}

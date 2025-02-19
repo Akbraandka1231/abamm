@@ -4,7 +4,10 @@ import CartTigaData from "../../component/molecules/Chart/CartTigaData";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Table from "../../component/molecules/TableSebesi";
+import TablePumma from "../../component/molecules/TableSebesi";
+import TableClimate from "../../component/molecules/TableClimate";
+import TableMaxbotic from "../../component/molecules/TableMaxbotic";
+import TableDevice from "../../component/molecules/TableDevice";
 
 const Index = ({
   datarealtime,
@@ -18,8 +21,11 @@ const Index = ({
   const [dataPummaSebesi, setDataPummaSebesi] = useState([]);
   const [dataDevice, setDataDevice] = useState([]);
   const [dataSerial, setDataSerial] = useState([]);
-  const [dataTablePummaSebesi, setDataTablePummaSebesi] = useState([]);
   const [dataClimate, setDataClimate] = useState([]);
+  const [dataTablePummaSebesi, setDataTablePummaSebesi] = useState([]);
+  const [dataTableClimate, setDataTableClimate] = useState([]);
+  const [dataTableMaxbotic, setDataTableMaxbotic] = useState([]);
+  const [dataTableDevice, setDataTableDevice] = useState([]);
   const [dataChart, setDataChart] = useState([]);
   const [timeFrame, setTimeFrame] = useState("minute");
   const [dataCamera, setDataCamera] = useState([]);
@@ -132,29 +138,15 @@ const Index = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let responseDataChart;
-        if (timeFrame === "7days") {
-          responseDataChart = await axios.get(
-            "https://c-greenproject.org:4443/petengoran/interval/?time=7%20days"
-          );
-        } else if (timeFrame === "30days") {
-          responseDataChart = await axios.get(
-            "https://c-greenproject.org:4443/petengoran/interval/?time=30%20days"
-          );
-        } else {
-          responseDataChart = await axios.get(
-            `https://c-greenproject.org:4443/petengoran/all/1?timer=${timeFrame}`
-          );
-        }
-
-        console.log(responseDataChart.data);
-        setDataChart(responseDataChart.data);
-        console.log(dataChart, timeFrame);
+        const response = await axios.get(
+          "https://c-greenproject.org:7070/climate_latest10"
+        );
+        console.log(response.data);
+        setDataTableClimate(response.data);
       } catch (err) {
         console.log(err.message);
       }
     };
-
     fetchData();
 
     const interval = setInterval(() => {
@@ -162,17 +154,114 @@ const Index = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [timeFrame, dataChart]);
+  }, [dataChart, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://c-greenproject.org:4443/petengoran/image",
-          {
-            responseType: "blob", // Penting: Mengatur responseType ke 'blob'
-          }
+          "https://c-greenproject.org:7070/serial_latest10"
         );
+        console.log(response.data);
+        setDataTableMaxbotic(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://c-greenproject.org:7070/device_latest10"
+        );
+        console.log(response.data);
+        setDataTableDevice(response.data);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchData();
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [dataChart, timeFrame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let responseDataChart;
+        
+        // Define the API endpoints based on timeFrame
+        switch(timeFrame) {
+          case "minute":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/all/1?timer=minute"
+            );
+            break;
+          case "hour":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=1%20hour"
+            );
+            break;
+            case "day":
+              responseDataChart = await axios.get(
+                "https://c-greenproject.org:4443/marinaj/interval/?time=1%20day"
+              );
+              break;
+          case "7days":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=7%20day"
+            );
+            break;
+          case "30days":
+            responseDataChart = await axios.get(
+              "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
+            );
+            break;
+          default:
+            // Handle day timeFrame or any other cases
+            responseDataChart = await axios.get(
+              `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
+            );
+        }
+  
+        setDataChart(responseDataChart.data);
+        console.log("Response data:", responseDataChart.data);
+        console.log("Current timeFrame:", timeFrame);
+      } catch (err) {
+        console.log("Error fetching data:", err.message);
+      }
+    };
+  
+    // Initial fetch
+    fetchData();
+  
+    // Set up polling interval
+    const interval = setInterval(fetchData, 5000);
+  
+    // Cleanup interval on unmount or timeFrame change
+    return () => clearInterval(interval);
+  }, [timeFrame]); // Removed dataChart from dependencies to avoid infinite loop
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://c-greenproject.org:7070/lastImage", {
+          responseType: "blob", // Penting: Mengatur responseType ke 'blob'
+        });
 
         // Konversi Blob ke URL agar dapat digunakan di <img>
         const imageUrl = URL.createObjectURL(response.data);
@@ -578,7 +667,6 @@ const Index = ({
                               {dataDevice.pv_current && (
                                 <p>{`${dataDevice.pv_current} A`}</p>
                               )}
-
                               <svg
                                 width="90"
                                 height="80"
@@ -723,10 +811,28 @@ const Index = ({
                         PUMMA U-TEWS 006
                       </h1>
                       <p className="py-1 md:text-xl text-lg font-normal py-3">
-                        Pulau Sebesi
+                        Pumma Water Pressure
                       </p>
                       <div className="grid text-center">
-                        <Table dataTablePummaSebesi={dataTablePummaSebesi} />
+                        <TablePumma dataTablePummaSebesi={dataTablePummaSebesi} />
+                      </div>
+                      <p className="py-1 md:text-xl text-lg font-normal py-3">
+                        Climate
+                      </p>
+                      <div className="grid text-center">
+                        <TableClimate dataTableClimate={dataTableClimate} />
+                      </div>
+                      <p className="py-1 md:text-xl text-lg font-normal py-3">
+                        Pumma Maxbotic
+                      </p>
+                      <div className="grid text-center">
+                        <TableMaxbotic dataTableMaxbotic={dataTableMaxbotic} />
+                      </div>
+                      <p className="py-1 md:text-xl text-lg font-normal py-3">
+                        Device
+                      </p>
+                      <div className="grid text-center">
+                        <TableDevice dataTableDevice={dataTableDevice} />
                       </div>
                     </TabPanel>
                     <TabPanel>
@@ -823,8 +929,8 @@ const Index = ({
                       <div className=" px-3 py-3 w-full  flex items-center rounded-sm">
                         <div className="w-[100%] h-[100%] overflow-hidden">
                           <SimpleMap
-                            latitude={-5.5875317}
-                            longitude={105.2264902}
+                            latitude={-5.9358271}
+                            longitude={105.5126511}
                           />
                         </div>
                       </div>

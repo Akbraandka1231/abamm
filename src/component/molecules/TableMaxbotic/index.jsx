@@ -1,7 +1,7 @@
 import React from "react";
 
-const Index = ({ dataTablePummaSebesi }) => {
-  console.log(dataTablePummaSebesi);
+const Index = ({ dataTableMaxbotic}) => {
+  console.log(dataTableMaxbotic);
   return (
     <div className="flex flex-col overflow-hidden over">
       <div className="overflow-x-scroll">
@@ -20,27 +20,15 @@ const Index = ({ dataTablePummaSebesi }) => {
                     Time
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Water Level Pressure
+                  Id
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Alert Signal
-                  </th>
-                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                    Forcast 30
-                  </th>
-                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                    Forcast 300
-                  </th>
-                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Threshold
-                  </th>
-                  <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  rms
+                  Maxbotic
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {dataTablePummaSebesi?.slice().map((item, i) => (
+                {dataTableMaxbotic?.slice().map((item, i) => (
                   <tr key={i}>
                     <td className="px-6 py-3 text-xs font-medium text-gray-800 whitespace-nowrap">
                       {i + 1}
@@ -55,22 +43,10 @@ const Index = ({ dataTablePummaSebesi }) => {
                       {/* Menampilkan hanya jam, menit, dan detik */}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.Water_level_Pressure}
+                      {item.id}
                     </td>
                     <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.Alert_Signal}
-                    </td>
-                    <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.For30}
-                    </td>
-                    <td className="px-6 py-3 text-xs text-gray-800 whitespace-nowrap">
-                      {item.For300}
-                    </td>
-                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
-                      {item.Threshold}
-                    </td>
-                    <td className="px-6 py-3 text-xs text-gray-800 text-center whitespace-nowrap">
-                      {item.rms}
+                      {item.maxbotic2}
                     </td>
                   </tr>
                 ))}
