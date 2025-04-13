@@ -1,6 +1,5 @@
 import React from "react";
-import { Chart, SimpleMap } from "../../component/molecules";
-import CartTigaData from "../../component/molecules/Chart/CartTigaData";
+import { SimpleMap } from "../../component/molecules";
 import CartSebesi from "../../component/molecules/Chart/ChartSebesi";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import axios from "axios";
@@ -35,7 +34,6 @@ const Index = ({
   const [dataChartGPS, setDataChartGPS] = useState([]);
   const [dataChartCPU, setDataChartCPU] = useState([]);
   const [dataChartSCC, setDataChartSCC] = useState([]);
-  const [dataChart, setDataChart] = useState([]);
   const [timeFrame, setTimeFrame] = useState("minute");
   // const [dataCamera, setDataCamera] = useState([]);
   const [coordinates, setCoordinates] = useState({ latitude: 0, longitude: 0 });
@@ -81,7 +79,7 @@ const Index = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [dataChart, timeFrame]);
+  }, [dataChartModbus, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,7 +100,7 @@ const Index = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [dataChart, timeFrame]);
+  }, [dataChartSerial, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,7 +121,7 @@ const Index = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [dataChart, timeFrame]);
+  }, [dataChartGPS, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -144,7 +142,7 @@ const Index = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [dataChart, timeFrame]);
+  }, [dataChartGPS, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -165,7 +163,7 @@ const Index = ({
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [dataChart, timeFrame]);
+  }, [dataChartSCC, timeFrame]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -337,7 +335,7 @@ const Index = ({
             break;
           case "daily":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:8040/cpu_daiy"
+              "https://c-greenproject.org:8040/cpu_daily"
             );
             break;
             case "weekly":
@@ -1438,31 +1436,31 @@ const Index = ({
                         <h1 className="py-2 font-bold md:text-2xl text-lg">
                           Ubuoy 001
                         </h1>
-                        <p className="px-20 pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
+                        <p className="pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
                           MODBUS
                         </p>
                         <div className="grid text-center">
                           <TableModbus dataTableModbus={dataTableModbus} />
                         </div>
-                        <p className="px-20 pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
+                        <p className="pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
                           Serial
                         </p>
                         <div className="grid text-center">
                           <TableSerial dataTableSerial={dataTableSerial} />
                         </div>
-                        <p className="px-20 pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
+                        <p className="pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
                           GPS
                         </p>
                         <div className="grid text-center">
                           <TableGPS dataTableGPS={dataTableGPS} />
                         </div>
-                        <p className="px-20 pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
+                        <p className="pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
                           CPU
                         </p>
                         <div className="grid text-center">
                           <TableCPU dataTableCPU={dataTableCPU} />
                         </div>
-                        <p className="px-20 pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
+                        <p className="pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
                           SCC
                         </p>
                         <div className="grid text-center">
@@ -1475,9 +1473,6 @@ const Index = ({
                       <h1 className="py-2 font-bold md:text-2xl text-lg">
                         Ubuoy 001
                       </h1>
-                      <p className="py-4 mb-3 md:text-xl text-base font-normal">
-                        EWS Buoy
-                      </p>
                       <div className="border border-black overflow-hidden bg-white w-fit rounded-lg py-1">
                         <select value={timeFrame} onChange={handleSelectChange}>
                           <option value="minute">Minutes</option>
@@ -1588,7 +1583,7 @@ const Index = ({
                         Ubuoy 001
                       </h1>
                       <p className="py-4 mb-3 md:text-xl text-base font-normal">
-                        EWS Buoy
+                        Pulau Sebesi
                       </p>
                       <div className=" px-3 py-3 w-full  flex items-center rounded-sm">
                         <div className="w-[100%] h-[100%] overflow-hidden">

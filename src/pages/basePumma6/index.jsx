@@ -218,12 +218,12 @@ const Index = ({
               "https://c-greenproject.org:7070/pumma_daily"
             );
             break;
-            case "day":
+            case "weekly":
               responseDataChart = await axios.get(
                 "https://c-greenproject.org:7070/pumma_weekly"
               );
               break;
-          case "7days":
+          case "monthly":
             responseDataChart = await axios.get(
               "https://c-greenproject.org:7070/pumma_monthly"
             );
@@ -317,17 +317,17 @@ const Index = ({
               "https://c-greenproject.org:7070/serial_latest10"
             );
             break;
-          case "hour":
+          case "daily":
             responseDataChart = await axios.get(
               "https://c-greenproject.org:7070/serial_daily"
             );
             break;
-            case "day":
+            case "weekly":
               responseDataChart = await axios.get(
                 "https://c-greenproject.org:7070/serial_weekly"
               );
               break;
-          case "7days":
+          case "monthly":
             responseDataChart = await axios.get(
               "https://c-greenproject.org:7070/serial_monthly"
             );
@@ -369,17 +369,17 @@ const Index = ({
               "https://c-greenproject.org:7070/device_latest10"
             );
             break;
-          case "hour":
+          case "daily":
             responseDataChart = await axios.get(
               "https://c-greenproject.org:7070/device_daily"
             );
             break;
-            case "day":
+            case "weekly":
               responseDataChart = await axios.get(
                 "https://c-greenproject.org:7070/device_weekly"
               );
               break;
-          case "7days":
+          case "monthly":
             responseDataChart = await axios.get(
               "https://c-greenproject.org:7070/device_monthly"
             );
