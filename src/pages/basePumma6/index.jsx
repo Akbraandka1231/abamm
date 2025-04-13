@@ -213,30 +213,25 @@ const Index = ({
               "https://c-greenproject.org:7070/pumma_latest10"
             );
             break;
-          case "hour":
+          case "daily":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=1%20hour"
+              "https://c-greenproject.org:7070/pumma_daily"
             );
             break;
             case "day":
               responseDataChart = await axios.get(
-                "https://c-greenproject.org:4443/marinaj/interval/?time=1%20day"
+                "https://c-greenproject.org:7070/pumma_weekly"
               );
               break;
           case "7days":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=7%20day"
-            );
-            break;
-          case "30days":
-            responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
+              "https://c-greenproject.org:7070/pumma_monthly"
             );
             break;
           default:
             // Handle day timeFrame or any other cases
             responseDataChart = await axios.get(
-              `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
+              `https://c-greenproject.org:7070/pumma_monthly`
             );
         }
   
@@ -270,30 +265,25 @@ const Index = ({
               "https://c-greenproject.org:7070/climate_latest10"
             );
             break;
-          case "hour":
+          case "daily":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=1%20hour"
+              "https://c-greenproject.org:7070/climate_daily"
             );
             break;
-            case "day":
+            case "weekly":
               responseDataChart = await axios.get(
-                "https://c-greenproject.org:4443/marinaj/interval/?time=1%20day"
+                "https://c-greenproject.org:7070/climate_weekly"
               );
               break;
-          case "7days":
+          case "monthly":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=7%20day"
-            );
-            break;
-          case "30days":
-            responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
+              "https://c-greenproject.org:7070/climate_monthly"
             );
             break;
           default:
             // Handle day timeFrame or any other cases
             responseDataChart = await axios.get(
-              `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
+              `https://c-greenproject.org:7070/climate_monthly`
             );
         }
   
@@ -329,28 +319,23 @@ const Index = ({
             break;
           case "hour":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=1%20hour"
+              "https://c-greenproject.org:7070/serial_daily"
             );
             break;
             case "day":
               responseDataChart = await axios.get(
-                "https://c-greenproject.org:4443/marinaj/interval/?time=1%20day"
+                "https://c-greenproject.org:7070/serial_weekly"
               );
               break;
           case "7days":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=7%20day"
-            );
-            break;
-          case "30days":
-            responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
+              "https://c-greenproject.org:7070/serial_monthly"
             );
             break;
           default:
             // Handle day timeFrame or any other cases
             responseDataChart = await axios.get(
-              `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
+              `https://c-greenproject.org:7070/serial_monthly`
             );
         }
   
@@ -386,28 +371,23 @@ const Index = ({
             break;
           case "hour":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=1%20hour"
+              "https://c-greenproject.org:7070/device_daily"
             );
             break;
             case "day":
               responseDataChart = await axios.get(
-                "https://c-greenproject.org:4443/marinaj/interval/?time=1%20day"
+                "https://c-greenproject.org:7070/device_weekly"
               );
               break;
           case "7days":
             responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=7%20day"
-            );
-            break;
-          case "30days":
-            responseDataChart = await axios.get(
-              "https://c-greenproject.org:4443/marinaj/interval/?time=30%20days"
+              "https://c-greenproject.org:7070/device_monthly"
             );
             break;
           default:
             // Handle day timeFrame or any other cases
             responseDataChart = await axios.get(
-              `https://c-greenproject.org:4443/marinaj/all/1?timer=${timeFrame}`
+              `https://c-greenproject.org:7070/device_monthly`
             );
         }
   
@@ -1212,10 +1192,9 @@ const Index = ({
                       <div className="border border-black overflow-hidden bg-white w-fit rounded-lg py-1">
                         <select value={timeFrame} onChange={handleSelectChange}>
                           <option value="minute">Minutes</option>
-                          <option value="hour">Hour</option>
-                          <option value="day">Day</option>
-                          <option value="7days">7 Days</option>
-                          <option value="30days">30 Days</option>
+                          <option value="daily">Daily</option>
+                          <option value="weekly">Weekly</option>
+                          <option value="monthly">Monthly</option>
                         </select>
                       </div>
                       <div className="grid md:grid-cols-2 md:gap-5">
