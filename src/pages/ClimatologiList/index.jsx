@@ -25,7 +25,7 @@ const Index = () => {
                         onClick={() => {
                           navigate(item.link);
                         }}
-                        className="flex flex-col rounded-lg border mx-10 mb-3 shadow-md px-6 text-gray-800 whitespace-nowrap pt-2 pb-2">
+                        className="flex flex-col rounded-lg border mx-10 mb-3 shadow-md px-6 text-gray-800 whitespace-nowrap pt-2 pb-2 animate-pulse">
                         <h1 className="max-[375px]:text-xs min-[450px]:text-lg font-semibold sm:text-base text-sm">{item.name1}</h1>
 
                         <h1 className="max-[375px]:text-xs min-[450px]:text-lg font-semibold sm:text-base text-sm">{item.name2}</h1>

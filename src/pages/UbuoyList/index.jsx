@@ -27,8 +27,10 @@ const Index = () => {
                         }}
                         className="flex flex-col rounded-lg border mx-10 mb-3 shadow-md px-6 text-gray-800 whitespace-nowrap pt-2 pb-2">
                         <h1 className="max-[375px]:text-xs min-[450px]:text-lg font-semibold sm:text-base text-sm">{item.name1}</h1>
+                        <p className="min-[450px]:text-base font-normal md:text-sm text-xs">{item.namelocation1}</p>
 
                         <h1 className="max-[375px]:text-xs min-[450px]:text-lg font-semibold sm:text-base text-sm">{item.name2}</h1>
+                        <p className="min-[450px]:text-base font-normal md:text-sm text-xs">{item.namelocation2}</p>
                       </div>
                   );
                 })}

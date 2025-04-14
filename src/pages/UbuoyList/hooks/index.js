@@ -68,10 +68,12 @@ const Index = () => {
   const dataBuoy = [
     {
       name1: "U-Buoy 001",
+      namelocation1 : "Pulau Sebesi",
       link: "/ubuoy-001",
     },
     {
       name2: "U-Buoy 002",
+      namelocation2 : "Anak Krakatau",
       link: "/ubuoy-001"
     },
   ];
