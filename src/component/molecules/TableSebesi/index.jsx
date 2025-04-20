@@ -20,7 +20,7 @@ const Index = ({ dataTablePummaSebesi }) => {
                     Time
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
-                  Water Level Pressure
+                  water column height
                   </th>
                   <th className="text-center px-6 py-3 text-xs font-bold text-left capitalize">
                   Alert Signal

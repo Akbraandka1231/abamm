@@ -502,7 +502,7 @@ const Index = ({
                             <div className="w-full">
                               <div className="flex space-x-4 items-center">
                                 <p className="font-semibold md:text-xl text-lg">
-                                  Sea Water Level
+                                water column height
                                 </p>
                               </div>
                               <div className="pt-2 md:text-3xl text-xl font-semibold justify-between flex space-x-5 items-center">
