@@ -2,78 +2,85 @@ import React from "react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen -m-6">
-      {/* Hero Section */}
-      <div className="relative h-screen">
-        <div className="absolute inset-0">
-          <img
-            src="/landing.svg"
-            alt="landing"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="relative container mx-auto pt-48 px-10">
-          <h1 className="text-5xl font-bold text-black mb-1 max-w-2xl ">
-            Join Us in Building a
-          </h1>
-          <h1 className="text-5xl font-bold text-black mb-1 max-w-2xl">
-            Tsunami Early Warning System
-          </h1>
-        </div>
-      </div>
+   <div className="min-h-screen -m-6">
+  {/* Hero Section */}
+  <div className="relative h-screen">
+    <div className="absolute inset-0">
+      <img
+        src="/landingnews.svg"
+        alt="landing"
+        className="w-full h-full object-cover opacity-90"
+      />
+    </div>
 
-      {/* About Project Section */}
+    {/* Logo Unila */}
+    <img
+      src="/logounila.svg"
+      alt="Logo Unila"
+      className="absolute top-5 right-5 w-16 h-auto z-10"
+    />
+
+    <div className="relative container mx-auto pt-56 px-10">
+      <h1
+  className="text-[84px] font-bold text-[#2E3192]"
+  style={{
+    WebkitTextStroke: '3px #E5E5EF', // ketebalan stroke dan warnanya
+  }}
+>
+  WELCOME TO <br />THE U-TEWS WEBSITE
+</h1>
+    </div>
+  </div>
+
+
+
       <section className="py-16 px-4 bg-white">
         <div className="container mx-auto">
           <div className="bg-[#2E3192] rounded-lg shadow-lg p-8">
             <h3 className="text-2xl font-semibold mb-6 text-white">
-              Sejarah Terbentuknya PUMMA dan Buoy
+              The History of PUMMA and Buoy Development
             </h3>
             <div className="space-y-6 text-white">
               <p>
-                Pada tanggal 22 Desember 2018, bencana tsunami besar melanda
-                wilayah Selat Sunda, yang terletak di antara Pulau Jawa dan
-                Sumatra. Tsunami ini diakibatkan oleh keruntuhan sebagian besar
-                tubuh barat Gunung Anak Krakatau, yang menyebabkan pulau
-                Krakatau kehilangan lebih dari 50% massanya. Keruntuhan ini
-                adalah hasil dari proses destabilisasi yang telah berlangsung
-                lama, yang akhirnya menyebabkan longsoran besar yang memicu
-                tsunami. Gelombang tsunami tersebut menerjang wilayah pesisir
-                Banten dan Lampung dengan ketinggian ombak yang mencapai hingga
-                13 meter. Di sekitar Gunung Anak Krakatau, tinggi ombak bahkan
-                mencapai 80 meter. Peristiwa tragis ini mengakibatkan korban
-                jiwa sebanyak 437 orang, 14.059 orang mengalami luka-luka, dan
-                lebih dari 33.719 orang kehilangan tempat tinggal. Selain itu,
-                erupsi vulkanik yang terjadi setelah longsor tersebut
-                memuntahkan material vulkanik yang semakin memperburuk situasi
-                di kawasan tersebut.{" "}
+                On December 22, 2018, a massive tsunami struck the Sunda Strait
+                region, located between the islands of Java and Sumatra. This
+                tsunami was triggered by the collapse of a significant portion
+                of the western flank of Mount Anak Krakatau, which caused the
+                island to lose more than 50% of its mass. The collapse was the
+                result of a long-term destabilization process that ultimately
+                led to a massive landslide and triggered the tsunami. The
+                tsunami waves hit the coastal areas of Banten and Lampung with
+                wave heights reaching up to 13 meters. Around Mount Anak
+                Krakatau, the waves even reached up to 80 meters. This tragic
+                event resulted in 437 fatalities, 14,059 people injured, and
+                more than 33,719 people displaced. Additionally, the volcanic
+                eruption that followed the landslide spewed volcanic material,
+                further worsening the conditions in the area.
               </p>
               <p>
-                Bencana tsunami Selat Sunda ini menjadi salah satu bencana alam
-                paling mematikan di Indonesia pada tahun 2018. Dampaknya yang
-                begitu besar tidak hanya mempengaruhi masyarakat setempat secara
-                langsung, tetapi juga membuka mata berbagai pihak tentang
-                pentingnya sistem peringatan dini yang efektif. Saat bencana
-                terjadi, sebagian besar masyarakat tidak mendapatkan peringatan
-                yang cukup dini untuk menghindari dampak tsunami. Hal ini
-                disebabkan oleh kurangnya teknologi pendeteksi yang mampu
-                memberikan peringatan secara cepat dan tepat waktu.{" "}
+                The Sunda Strait tsunami became one of the deadliest natural
+                disasters in Indonesia in 2018. Its devastating impact not only
+                directly affected local communities but also raised awareness
+                among many parties about the importance of having an effective
+                early warning system. At the time of the disaster, most
+                residents did not receive timely warnings to evacuate. This was
+                due to the lack of detection technology capable of providing
+                fast and accurate alerts.
               </p>
               <p>
-                Berangkat dari peristiwa tersebut, tim dosen dari Universitas
-                Lampung, yang dipimpin oleh Dr. Ing. Ardian Ulvan, S.T., M.Sc.,
-                bersama dengan Melvi, S.T., M.T., Ph.D., Mona Arif Muda, S.T.,
-                M.T., serta tim mahasiswa, melakukan penelitian untuk
-                mengembangkan alat peringatan dini yang lebih canggih dan
-                responsif. Kami menciptakan dua perangkat utama, yaitu PUMMA dan
-                Buoy, yang dirancang khusus untuk mendeteksi tsunami dengan
-                mengukur ketinggian air laut secara real-time dan membantu
-                memberikan informasi ke BMKG sebagai pihak yang berwenang dalam
-                mitigasi bencana di indonesia untuk memberi peringatan ke
-                masyarakat. Inovasi ini diharapkan dapat menjadi solusi dalam
-                memitigasi risiko tsunami di masa mendatang, serta memberikan
-                waktu yang cukup bagi masyarakat untuk menyelamatkan diri dan
-                mengurangi potensi kerugian material dan korban jiwa.{" "}
+                Arising from this incident, a team of lecturers from the
+                University of Lampung, led by Dr. Ing. Ardian Ulvan, S.T.,
+                M.Sc., along with Melvi, S.T., M.T., Ph.D., Mona Arif Muda,
+                S.T., M.T., and a team of students, conducted research to
+                develop a more advanced and responsive early warning system. We
+                created two main devices, PUMMA and Buoy, specifically designed
+                to detect tsunamis by measuring sea level in real-time and to
+                provide data to the Meteorology, Climatology, and Geophysics
+                Agency (BMKG), the official authority for disaster mitigation in
+                Indonesia. This innovation is expected to be a solution for
+                mitigating future tsunami risks, giving communities sufficient
+                time to evacuate and reducing potential material losses and
+                casualties.
               </p>
             </div>
           </div>

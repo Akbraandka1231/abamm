@@ -592,7 +592,7 @@ const Index = ({
                   <TabPanels>
                     <TabPanel>
                       <h1 className="py-2 font-bold md:text-2xl text-lg">
-                        Ubuoy 001
+                      BUOY U-TEWS 001
                       </h1>
                       <p className="py-4 mb-3 md:text-xl text-base font-normal">
                         Pulau Sebesi
@@ -1434,8 +1434,11 @@ const Index = ({
                       {" "}
                       <div className="max-h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 pr-4">
                         <h1 className="py-2 font-bold md:text-2xl text-lg">
-                          Ubuoy 001
+                        BUOY U-TEWS 001
                         </h1>
+                        <p className="py-4 mb-3 md:text-xl text-base font-normal">
+                        Pulau Sebesi
+                      </p>
                         <p className="pt-5 pb-4 md:text-xl text-base font-bold text-[#2E3192]">
                           MODBUS
                         </p>
@@ -1471,8 +1474,11 @@ const Index = ({
                     <TabPanel>
                       {" "}
                       <h1 className="py-2 font-bold md:text-2xl text-lg">
-                        Ubuoy 001
+                      BUOY U-TEWS 001
                       </h1>
+                      <p className="py-4 mb-3 md:text-xl text-base font-normal">
+                        Pulau Sebesi
+                      </p>
                       <div className="border border-black overflow-hidden bg-white w-fit rounded-lg py-1">
                         <select value={timeFrame} onChange={handleSelectChange}>
                           <option value="minute">Minutes</option>
@@ -1580,7 +1586,7 @@ const Index = ({
                     </TabPanel>
                     <TabPanel>
                       <h1 className="py-2 font-bold md:text-2xl text-lg">
-                        Ubuoy 001
+                      BUOY U-TEWS 001
                       </h1>
                       <p className="py-4 mb-3 md:text-xl text-base font-normal">
                         Pulau Sebesi
